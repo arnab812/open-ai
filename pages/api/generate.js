@@ -27,8 +27,8 @@ export default async function (req, res) {
 
   try {
     const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(animal),
+      model: "gpt-3.5-turbo-instruct",
+      prompt: generatePrompt(req.body.animal),
       temperature: 0.6,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -60,3 +60,16 @@ Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
 Animal: ${capitalizedAnimal}
 Names:`;
 }
+
+/*
+
+! Explanation: 
+    * - API request: ${capitalizedAnimal} | temperature: 0.6
+
+const completion = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: generatePrompt(animal),
+      temperature: 0.6,
+    });
+
+*/
